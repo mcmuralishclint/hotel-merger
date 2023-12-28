@@ -32,6 +32,6 @@ jobs:
       - name: Install dependencies
         run: bin/bundle install --jobs 4 --retry 3
       - name: Set up database schema
-        run: bin/rails db:migrate
+        run: bundle exec rails db:migrate
       - name: Run RSpec tests
-        run: bin/rspec
+        run: bundle exec rspec
