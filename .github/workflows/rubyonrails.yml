@@ -4,12 +4,28 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+      elasticsearch:
+        image: elasticsearch:6.8.3
+        ports:
+          - 9200/tcp
+        options: -e="discovery.type=single-node" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
     env:
       RAILS_ENV: test
-      DATABASE_URL: "sqlite3::memory:"
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+      ELASTICSEARCH_URL: "http://localhost:9200"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -17,9 +33,9 @@ jobs:
         uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
         with:
           bundler-cache: true
-      - name: Set up database
-        run: |
-          bundle exec rails db:create
-          bundle exec rails db:migrate
-      - name: Run tests
-        run: rspec
+      - name: Install dependencies
+        run: bin/bundle install --jobs 4 --retry 3
+      - name: Set up database schema
+        run: bin/rails db:migrate
+      - name: Run RSpec tests
+        run: bundle exec rspec
