@@ -19,6 +19,7 @@ class HotelsPersistentService
     validated_params['amenities_attributes'] = validate_amenities_attributes(@hotel_params['amenities_attributes'])
     validated_params['images_attributes'] = validate_images_attributes(@hotel_params['images_attributes'])
     validated_params['booking_conditions_attributes'] = validate_booking_conditions_attributes(@hotel_params['booking_conditions_attributes'])
+    validated_params.reject! { |_k, v| v.nil? }
     validated_params
   end
 
@@ -31,7 +32,7 @@ class HotelsPersistentService
   end
 
   def validate_description(description)
-    if description.length > (@hotel&.description&.length || 0)
+    if (description&.length || 0) > (@hotel&.description&.length || 0)
       description
     else
       @hotel.description
@@ -45,25 +46,24 @@ class HotelsPersistentService
   def validate_location_attributes(location_attributes)
     model_location = @hotel.location
     updated_attributes = {}
-
-    updated_attributes['lat'] = [model_location.lat, location_attributes['lat']].max if location_attributes['lat'].present?
-    updated_attributes['lng'] = [model_location.lng, location_attributes['lng']].max if location_attributes['lng'].present?
-    updated_attributes['address'] = if location_attributes['address'].present? && location_attributes['address'].length > model_location.address.length
+    updated_attributes['lat'] = [model_location&.lat || 0, location_attributes['lat'] || 0].max if location_attributes['lat'].present?
+    updated_attributes['lng'] = [model_location&.lng || 0, location_attributes['lng'] || 0].max if location_attributes['lng'].present?
+    updated_attributes['address'] = if location_attributes['address'].present? && location_attributes['address'].length > (model_location&.address&.length || 0)
                                       location_attributes['address']
                                     else
                                       model_location.address
                                     end
 
-    updated_attributes['city'] = if location_attributes['city'].present? && location_attributes['city'].length > model_location.city.length
+    updated_attributes['city'] = if location_attributes['city'].present? && location_attributes['city'].length > (model_location&.city&.length || 0)
                                       location_attributes['city']
                                     else
-                                      model_location.city
+                                      model_location&.city
                                     end
 
-    updated_attributes['country'] = if location_attributes['country'].present? && location_attributes['country'].length > model_location.country.length
+    updated_attributes['country'] = if location_attributes['country'].present? && location_attributes['country'].length > (model_location&.country&.length || 0)
                                       location_attributes['country']
                                     else
-                                      model_location.country
+                                      model_location&.country
                                     end
     updated_attributes
   end
