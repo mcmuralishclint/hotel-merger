@@ -43,6 +43,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_075052) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["hotel_id", "image_type", "link"], name: "index_images_on_hotel_id_and_image_type_and_link", unique: true
     t.index ["hotel_id"], name: "index_images_on_hotel_id"
   end
 
