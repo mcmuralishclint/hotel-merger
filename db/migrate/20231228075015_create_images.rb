@@ -8,5 +8,6 @@ class CreateImages < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+    add_index :images, [:hotel_id, :image_type, :link], unique: true
   end
 end
