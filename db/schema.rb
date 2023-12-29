@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_075052) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["hotel_id", "amenity_type", "name"], name: "index_amenities_on_hotel_id_and_amenity_type_and_name", unique: true
     t.index ["hotel_id"], name: "index_amenities_on_hotel_id"
   end
 
@@ -25,6 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_075052) do
     t.text "condition"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["hotel_id", "condition"], name: "index_booking_conditions_on_hotel_id_and_condition", unique: true
     t.index ["hotel_id"], name: "index_booking_conditions_on_hotel_id"
   end
 
