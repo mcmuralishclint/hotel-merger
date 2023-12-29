@@ -11,7 +11,7 @@ RSpec.describe HotelsIngestionService do
 
     context 'with "*" as suppliers' do
       it 'assigns all valid suppliers to @suppliers' do
-        service = HotelsIngestionService.new('*')
+        service = HotelsIngestionService.new(['*'])
         expect(service.instance_variable_get(:@suppliers)).to eq(['acme', 'patagonia', 'paperflies'])
       end
     end

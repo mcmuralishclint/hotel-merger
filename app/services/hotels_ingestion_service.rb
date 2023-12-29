@@ -2,7 +2,7 @@ class HotelsIngestionService
   VALID_SUPPLIERS = ["acme", "patagonia", "paperflies"]
 
   def initialize(suppliers)
-    @suppliers = if suppliers == "*"
+    @suppliers = if suppliers == ["*"]
                    VALID_SUPPLIERS
                  else
                    VALID_SUPPLIERS & suppliers rescue []
