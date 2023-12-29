@@ -6,5 +6,6 @@ class CreateBookingConditions < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+    add_index :booking_conditions, [:hotel_id, :condition], unique: true
   end
 end

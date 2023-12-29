@@ -7,5 +7,6 @@ class CreateAmenities < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+    add_index :amenities, [:hotel_id, :amenity_type, :name], unique: true
   end
 end
