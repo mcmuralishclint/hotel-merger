@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
+      MINIMUM_COVERAGE: 75
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -25,3 +26,21 @@ jobs:
         run: bundle exec rails db:migrate
       - name: Run RSpec tests
         run: bundle exec rspec
+      - name: Check Coverage
+        run: |
+          covered_percent=$(cat coverage/coverage.json | jq -r '.metrics.covered_percent');
+          
+          re='^[+-]?[0-9]+([.||,][0-9]+)?$';
+          if ! [[ $covered_percent =~ $re ]]; then 
+            echo "Couldn't get coverage from artifact.";
+            exit 0 # Returning 0 doesn't invalidate this step.
+          fi
+          
+          required_coverage=${{env.MINIMUM_COVERAGE}};
+          
+          if [ $covered_percent -le $required_coverage ]; then
+            echo "Coverage ($covered_percent%) is below the required threshold of $required_coverage%.";
+            exit 1 # Returning 1 will invalidate this step and the job will be marked as failed.
+          else
+            echo "Coverage ($covered_percent%) passed the required threshold of $required_coverage%."
+          fi
