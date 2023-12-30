@@ -27,9 +27,13 @@ RSpec.describe Ingest::HotelsIngestionService do
   describe '#ingest' do
     it 'calls fetch_and_save_hotel_info for each supplier' do
       acme_service = instance_double('Supplier::AcmeService')
+      merge_service = instance_double('Merge::HotelsMergeService')
 
       allow(Supplier::AcmeService).to receive(:new).and_return(acme_service)
       allow(acme_service).to receive(:perform)
+
+      allow(Merge::HotelsMergeService).to receive(:new).and_return(merge_service)
+      allow(merge_service).to receive(:perform)
 
       service = Ingest::HotelsIngestionService.new(['acme'])
 
