@@ -10,13 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
-      MONGODB_VERSION: '4.4'
-      MONGODB_URL: 'mongodb://127.0.0.1:27017/raw_data'
     services:
       mongodb:
-        image: 'mongo:${{ env.MONGODB_VERSION }}'
+        image: mongo
+        options: >-
+          --health-cmd mongo
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
         ports:
           - 27017:27017
+        env:
+          MONGO_INITDB_DATABASE: raw_data
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
