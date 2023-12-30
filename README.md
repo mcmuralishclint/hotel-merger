@@ -1,4 +1,6 @@
-<a name="_3x7bdkewk2u4"></a>Hotel Merger
+# Ascenda - Hotel Data Merge
+
+# Solution Design
 
 ## High Level Design
 ![High Level Diagram](https://github.com/mcmuralishclint/hotel-merger/blob/master/public/hld.jpg)
@@ -34,5 +36,4 @@ curl --location 'http://localhost:3000/api/v1/hotels/search?search_type=id&searc
 
 ## CI/CD
 ![CICD Approach](https://github.com/mcmuralishclint/hotel-merger/blob/master/public/cicd.png)
-
 
