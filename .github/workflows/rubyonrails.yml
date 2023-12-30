@@ -26,6 +26,8 @@ jobs:
         run: bundle exec rails db:migrate
       - name: Run RSpec tests
         run: bundle exec rspec
+      - name: Run RuboCop
+        run: bundle exec rubocop --format simple --fail-level autocorrect
       - name: Check Coverage
         run: |
           covered_percent=$(cat coverage/coverage.json | jq -r '.metrics.covered_percent');
