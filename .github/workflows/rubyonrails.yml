@@ -14,8 +14,6 @@ jobs:
       MINIMUM_COVERAGE: 75
 
     steps:
-      # Previous steps remain unchanged...
-
       - name: Run RuboCop with Auto-Correction
         run: |
           bundle exec rubocop --auto-correct || true
