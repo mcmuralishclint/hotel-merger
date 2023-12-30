@@ -8,7 +8,8 @@ module Supplier
           hotel_id: @hotel_params['Id'],
           destination_id: @hotel_params['DestinationId'],
           name: @hotel_params['Name'].strip,
-          description: @hotel_params['Description'].strip
+          description: @hotel_params['Description'].strip,
+          source: "ACME"
         }
       end
 

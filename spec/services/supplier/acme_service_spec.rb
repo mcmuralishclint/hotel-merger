@@ -9,14 +9,14 @@ RSpec.describe Supplier::AcmeService do
 
     before do
       allow(acme_service).to receive(:fetch_hotels).and_return(mock_hotels)
-      allow(acme_service).to receive(:save_hotel_info)
+      allow(acme_service).to receive(:persist_raw_data)
     end
 
-    it 'calls save_hotel_info with parsed hotel params' do
-      acme_service.fetch_and_save_hotel_info
+    it 'calls save_hotel_info with parsed hotels params' do
+      acme_service.perform
 
       expect(acme_service).to have_received(:fetch_hotels)
-      expect(acme_service).to have_received(:save_hotel_info).exactly(mock_hotels.size).times
+      expect(acme_service).to have_received(:persist_raw_data).exactly(mock_hotels.size).times
     end
   end
 end

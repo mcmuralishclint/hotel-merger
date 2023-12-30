@@ -7,7 +7,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :hotels_ingestion do
+      resources :ingestion do
         collection do
           post :ingest
         end
