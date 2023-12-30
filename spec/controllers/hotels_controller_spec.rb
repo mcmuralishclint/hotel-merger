@@ -8,7 +8,7 @@ RSpec.describe Api::V1::HotelsController, type: :controller do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'returns a list of hotels by hotel id' do
+      it 'returns a list of hotels by hotels id' do
         get :search, params: { search_type: 'id', search_value: 123 }
         expect(response).to have_http_status(:ok)
       end

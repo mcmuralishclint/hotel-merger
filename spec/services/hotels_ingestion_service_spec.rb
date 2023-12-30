@@ -1,24 +1,24 @@
 require 'rails_helper'
 
-RSpec.describe HotelsIngestionService do
+RSpec.describe Ingest::HotelsIngestionService do
   describe '#initialize' do
     context 'with valid suppliers' do
       it 'assigns valid suppliers to @suppliers' do
-        service = HotelsIngestionService.new(['acme', 'patagonia'])
+        service = Ingest::HotelsIngestionService.new(['acme', 'patagonia'])
         expect(service.instance_variable_get(:@suppliers)).to contain_exactly('acme', 'patagonia')
       end
     end
 
     context 'with "*" as suppliers' do
       it 'assigns all valid suppliers to @suppliers' do
-        service = HotelsIngestionService.new(['*'])
+        service = Ingest::HotelsIngestionService.new(['*'])
         expect(service.instance_variable_get(:@suppliers)).to eq(['acme', 'patagonia', 'paperflies'])
       end
     end
 
     context 'with invalid suppliers' do
       it 'assigns empty array to @suppliers' do
-        service = HotelsIngestionService.new(['invalid', 'another_invalid'])
+        service = Ingest::HotelsIngestionService.new(['invalid', 'another_invalid'])
         expect(service.instance_variable_get(:@suppliers)).to eq([])
       end
     end
@@ -29,11 +29,11 @@ RSpec.describe HotelsIngestionService do
       acme_service = instance_double('Supplier::AcmeService')
 
       allow(Supplier::AcmeService).to receive(:new).and_return(acme_service)
-      allow(acme_service).to receive(:fetch_and_save_hotel_info)
+      allow(acme_service).to receive(:perform)
 
-      service = HotelsIngestionService.new(['acme'])
+      service = Ingest::HotelsIngestionService.new(['acme'])
 
-      expect(acme_service).to receive(:fetch_and_save_hotel_info)
+      expect(acme_service).to receive(:perform)
       service.ingest
     end
   end
