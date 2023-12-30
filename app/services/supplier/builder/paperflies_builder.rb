@@ -6,7 +6,8 @@ module Supplier
           hotel_id: @hotel_params['hotel_id'],
           destination_id: @hotel_params['destination_id'],
           name: @hotel_params['hotel_name']&.strip,
-          description: @hotel_params['details']&.strip
+          description: @hotel_params['details']&.strip,
+          source: "PAPERFLIES"
         }
       end
 
@@ -44,7 +45,7 @@ module Supplier
         @hotel_params['images'].each do |category, images|
           images.each do |image|
             images_attributes[:images_attributes] << {
-              hotel_id: @hotel_params['hotel_id'],
+              # hotel_id: @hotel_params['hotel_id'],
               image_type: category.to_s.capitalize,
               link: image['link'],
               description: image['caption']
