@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Merge
   class HotelsMergeService
     def initialize
@@ -5,14 +7,13 @@ module Merge
     end
 
     def perform
-      merged_params = merge(@hotels)
-      merged_params
+      merge(@hotels)
     end
 
     def merge(hotel_ids)
       merged_info = []
       hotel_ids.each do |hotel_id|
-        hotels = RawData.where(hotel_id: hotel_id)
+        hotels = RawData.where(hotel_id:)
         merged_params = {}
         merged_params[:id] = hotel_id
         merged_params[:destination_id] = merge_destination_ids(hotels.pluck(:destination_id))
@@ -21,7 +22,8 @@ module Merge
         merged_params[:location_attributes] = merge_locations(hotels.pluck(:location_attributes))
         merged_params[:amenities_attributes] = merge_amenities(hotels.pluck(:amenities_attributes))
         merged_params[:images_attributes] = merge_images(hotels.pluck(:images_attributes))
-        merged_params[:booking_conditions_attributes] = merge_booking_conditions(hotels.pluck(:booking_conditions_attributes))
+        merged_params[:booking_conditions_attributes] =
+          merge_booking_conditions(hotels.pluck(:booking_conditions_attributes))
         merged_info << merged_params
       end
       merged_info
@@ -34,20 +36,20 @@ module Merge
     end
 
     def merge_descriptions(descriptions)
-      descriptions.sort.last rescue nil
+      descriptions.max
+    rescue StandardError
+      nil
     end
 
     def merge_names(names)
-      names.sort.last
+      names.max
     end
 
     def merge_locations(locations)
       locations.map! { |location| eval(location) }
-      merged_hash = locations.inject({}) do |acc, h|
+      locations.each_with_object({}) do |h, acc|
         h.each { |k, v| acc[k] = [acc[k], v].compact.max_by { |e| e.to_s.length } }
-        acc
       end
-      merged_hash
     end
 
     def merge_amenities(amenities)
@@ -87,8 +89,7 @@ module Merge
 
     def merge_booking_conditions(booking_conditions)
       parsed_conditions = booking_conditions.compact.map { |str| JSON.parse(str.gsub('=>', ':')) }
-      merged_conditions = parsed_conditions.flatten.map { |hash| { condition: hash['condition'] } }
-      merged_conditions
+      parsed_conditions.flatten.map { |hash| { condition: hash['condition'] } }
     end
   end
 end

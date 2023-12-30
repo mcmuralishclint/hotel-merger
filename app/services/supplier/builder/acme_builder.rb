@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Supplier
   module Builder
     class AcmeBuilder < BaseBuilder
@@ -9,7 +11,7 @@ module Supplier
           destination_id: @hotel_params['DestinationId'],
           name: @hotel_params['Name'].strip,
           description: @hotel_params['Description'].strip,
-          source: "ACME"
+          source: 'ACME'
         }
       end
 
@@ -26,13 +28,12 @@ module Supplier
       end
 
       def build_amenities_attributes
-        { amenities_attributes: @hotel_params['Facilities'].map {
-          |amenity| {
+        { amenities_attributes: @hotel_params['Facilities'].map do |amenity|
+          {
             name: amenity.strip.downcase,
-            amenity_type: "General"
+            amenity_type: 'General'
           }
-        }
-        }
+        end }
       end
     end
   end

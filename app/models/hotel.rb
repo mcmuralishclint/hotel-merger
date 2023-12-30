@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Hotel < ApplicationRecord
   has_one :location, dependent: :destroy
   has_many :amenities, dependent: :destroy

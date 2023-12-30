@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Supplier::AcmeService do
   describe '#fetch_and_save_hotel_info' do
     let(:mock_hotels) do

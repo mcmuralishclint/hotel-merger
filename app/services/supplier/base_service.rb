@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Supplier
   class BaseService
     def perform
@@ -10,12 +12,15 @@ module Supplier
 
     private
 
-    def path
-    end
+    def path; end
 
     def fetch_hotels
       response = HTTParty.get(path)
-      JSON.parse(response.body) rescue []
+      begin
+        JSON.parse(response.body)
+      rescue StandardError
+        []
+      end
     end
 
     def parse_hotel_params(hotel_params)

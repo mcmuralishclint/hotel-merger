@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Supplier
   module Builder
     class PatagoniaBuilder < BaseBuilder
@@ -7,7 +9,7 @@ module Supplier
           destination_id: @hotel_params['destination'],
           name: @hotel_params['name']&.strip,
           description: @hotel_params['info']&.strip,
-          source: "PATAGONIA"
+          source: 'PATAGONIA'
         }
       end
 
@@ -22,13 +24,12 @@ module Supplier
       end
 
       def build_amenities_attributes
-        { amenities_attributes: @hotel_params['amenities']&.map {
-          |amenity| {
+        { amenities_attributes: @hotel_params['amenities']&.map do |amenity|
+          {
             name: amenity.strip.downcase,
-            amenity_type: "General"
+            amenity_type: 'General'
           }
-        }
-        }
+        end }
       end
 
       def build_images_attributes

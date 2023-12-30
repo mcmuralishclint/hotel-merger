@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HotelSerializer < ActiveModel::Serializer
   attributes :id, :destination_id, :name, :description, :amenities, :images, :booking_conditions
   has_one :location, serializer: LocationSerializer

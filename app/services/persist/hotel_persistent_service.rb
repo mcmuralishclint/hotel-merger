@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Persist
   class HotelPersistentService < BaseService
     def validate_and_save

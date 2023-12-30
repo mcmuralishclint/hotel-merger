@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Ingest::HotelsIngestionService do
   describe '#initialize' do
     context 'with valid suppliers' do
       it 'assigns valid suppliers to @suppliers' do
-        service = Ingest::HotelsIngestionService.new(['acme', 'patagonia'])
+        service = Ingest::HotelsIngestionService.new(%w[acme patagonia])
         expect(service.instance_variable_get(:@suppliers)).to contain_exactly('acme', 'patagonia')
       end
     end
@@ -12,13 +14,13 @@ RSpec.describe Ingest::HotelsIngestionService do
     context 'with "*" as suppliers' do
       it 'assigns all valid suppliers to @suppliers' do
         service = Ingest::HotelsIngestionService.new(['*'])
-        expect(service.instance_variable_get(:@suppliers)).to eq(['acme', 'patagonia', 'paperflies'])
+        expect(service.instance_variable_get(:@suppliers)).to eq(%w[acme patagonia paperflies])
       end
     end
 
     context 'with invalid suppliers' do
       it 'assigns empty array to @suppliers' do
-        service = Ingest::HotelsIngestionService.new(['invalid', 'another_invalid'])
+        service = Ingest::HotelsIngestionService.new(%w[invalid another_invalid])
         expect(service.instance_variable_get(:@suppliers)).to eq([])
       end
     end

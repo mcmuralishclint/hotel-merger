@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateAmenities < ActiveRecord::Migration[7.0]
   def change
     create_table :amenities do |t|
@@ -7,6 +9,6 @@ class CreateAmenities < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-    add_index :amenities, [:hotel_id, :amenity_type, :name], unique: true
+    add_index :amenities, %i[hotel_id amenity_type name], unique: true
   end
 end
