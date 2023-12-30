@@ -1,24 +1,10 @@
-# README
+<a name="_3x7bdkewk2u4"></a>Hotel Merger
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## High Level Design
+![High Level Diagram](public/hld.png)
 
-Things you may want to cover:
+## API
+## Database
+## CI/CD
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
