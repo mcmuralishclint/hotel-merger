@@ -14,7 +14,10 @@ module Ingest
       @suppliers.each do |supplier|
         ("Supplier::" + supplier.camelcase + "Service").constantize.new.perform
       end
-      Merge::HotelsMergeService.new.perform
+      merged_params = Merge::HotelsMergeService.new.perform
+      merged_params.each do |merged_param|
+        Persist::HotelPersistentService.new(merged_param).validate_and_save
+      end
     end
   end
 end

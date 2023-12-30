@@ -6,9 +6,7 @@ module Merge
 
     def perform
       merged_params = merge(@hotels)
-      merged_params.each do |merged_param|
-        Persist::HotelPersistentService.new(merged_param).validate_and_save
-      end
+      merged_params
     end
 
     def merge(hotel_ids)

@@ -33,7 +33,7 @@ RSpec.describe Ingest::HotelsIngestionService do
       allow(acme_service).to receive(:perform)
 
       allow(Merge::HotelsMergeService).to receive(:new).and_return(merge_service)
-      allow(merge_service).to receive(:perform)
+      allow(merge_service).to receive(:perform).and_return([])
 
       service = Ingest::HotelsIngestionService.new(['acme'])
 
