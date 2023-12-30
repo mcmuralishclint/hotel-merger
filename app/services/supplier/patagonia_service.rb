@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Supplier
   class PatagoniaService < BaseService
     def parse_hotel_params(hotel_params)
@@ -7,7 +9,7 @@ module Supplier
     private
 
     def path
-      "https://5f2be0b4ffc88500167b85a0.mockapi.io/suppliers/patagonia"
+      'https://5f2be0b4ffc88500167b85a0.mockapi.io/suppliers/patagonia'
     end
   end
 end

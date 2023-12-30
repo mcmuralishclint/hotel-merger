@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Api
   module V1
-    ALLOWED_SEARCH_TYPE = ["destination_id", "id"]
+    ALLOWED_SEARCH_TYPE = %w[destination_id id].freeze
 
     class HotelsController < ApplicationController
       before_action :validate_search_params
@@ -20,9 +22,9 @@ module Api
           return render json: { error: 'Search parameters are missing' }, status: :unprocessable_entity
         end
 
-        unless ALLOWED_SEARCH_TYPE.include?(params[:search_type])
-          return render json: { error: 'Invalid search type' }, status: :unprocessable_entity
-        end
+        return if ALLOWED_SEARCH_TYPE.include?(params[:search_type])
+
+        render json: { error: 'Invalid search type' }, status: :unprocessable_entity
       end
     end
   end

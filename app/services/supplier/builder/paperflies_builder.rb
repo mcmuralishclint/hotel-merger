@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Supplier
   module Builder
     class PaperfliesBuilder < BaseBuilder
@@ -7,7 +9,7 @@ module Supplier
           destination_id: @hotel_params['destination_id'],
           name: @hotel_params['hotel_name']&.strip,
           description: @hotel_params['details']&.strip,
-          source: "PAPERFLIES"
+          source: 'PAPERFLIES'
         }
       end
 
@@ -63,7 +65,7 @@ module Supplier
 
         @hotel_params['booking_conditions'].each do |condition|
           attributes[:booking_conditions_attributes] << {
-            condition: condition
+            condition:
           }
         end
 

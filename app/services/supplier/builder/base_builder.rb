@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Supplier
   module Builder
     class BaseBuilder
@@ -16,20 +18,15 @@ module Supplier
 
       private
 
-      def build_basic_attributes
-      end
+      def build_basic_attributes; end
 
-      def build_location_attributes
-      end
+      def build_location_attributes; end
 
-      def build_amenities_attributes
-      end
+      def build_amenities_attributes; end
 
-      def build_images_attributes
-      end
+      def build_images_attributes; end
 
-      def build_booking_condition_attributes
-      end
+      def build_booking_condition_attributes; end
     end
   end
 end

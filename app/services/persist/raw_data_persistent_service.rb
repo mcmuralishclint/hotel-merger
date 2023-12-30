@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Persist
   class RawDataPersistentService < BaseService
     def validate_and_save
@@ -17,7 +19,8 @@ module Persist
       validated_params['location_attributes'] = validate_location_attributes(@params['location_attributes'])
       validated_params['amenities_attributes'] = validate_amenities_attributes(@params['amenities_attributes'])
       validated_params['images_attributes'] = validate_images_attributes(@params['images_attributes'])
-      validated_params['booking_conditions_attributes'] = validate_booking_conditions_attributes(@params['booking_conditions_attributes'])
+      validated_params['booking_conditions_attributes'] =
+        validate_booking_conditions_attributes(@params['booking_conditions_attributes'])
       validated_params.reject! { |_k, v| v.nil? }
       validated_params
     end

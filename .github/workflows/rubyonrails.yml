@@ -27,7 +27,7 @@ jobs:
       - name: Run RSpec tests
         run: bundle exec rspec
       - name: Run RuboCop
-        run: bundle exec rubocop --format simple --fail-level autocorrect
+        run: bundle exec rubocop --auto-correct
       - name: Check Coverage
         run: |
           covered_percent=$(cat coverage/coverage.json | jq -r '.metrics.covered_percent');

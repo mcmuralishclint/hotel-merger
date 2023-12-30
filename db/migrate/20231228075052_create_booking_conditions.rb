@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateBookingConditions < ActiveRecord::Migration[7.0]
   def change
     create_table :booking_conditions do |t|
@@ -6,6 +8,6 @@ class CreateBookingConditions < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-    add_index :booking_conditions, [:hotel_id, :condition], unique: true
+    add_index :booking_conditions, %i[hotel_id condition], unique: true
   end
 end

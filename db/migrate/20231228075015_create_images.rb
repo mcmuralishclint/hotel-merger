@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateImages < ActiveRecord::Migration[7.0]
   def change
     create_table :images do |t|
@@ -8,6 +10,6 @@ class CreateImages < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-    add_index :images, [:hotel_id, :image_type, :link], unique: true
+    add_index :images, %i[hotel_id image_type link], unique: true
   end
 end
