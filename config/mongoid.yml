@@ -4,9 +4,13 @@ development:
       database: procure
       hosts:
         - localhost:27017
+      username: root
+      password: root
 test:
   clients:
     default:
       database: procure
       hosts:
         - localhost:27017
+      username: root
+      password: root
