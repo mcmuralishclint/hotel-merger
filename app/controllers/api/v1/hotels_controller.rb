@@ -8,8 +8,8 @@ module Api
       before_action :validate_search_params
 
       def search
-        search_type = params[:search_type]
-        search_value = params[:search_value]
+        search_type = params[:type]
+        search_value = params[:value]
 
         hotels = Hotel.where(search_type => search_value)
         render json: hotels, each_serializer: HotelSerializer
@@ -18,11 +18,11 @@ module Api
       private
 
       def validate_search_params
-        unless params[:search_type].present? && params[:search_value].present?
+        unless params[:type].present? && params[:value].present?
           return render json: { error: 'Search parameters are missing' }, status: :unprocessable_entity
         end
 
-        return if ALLOWED_SEARCH_TYPE.include?(params[:search_type])
+        return if ALLOWED_SEARCH_TYPE.include?(params[:type])
 
         render json: { error: 'Invalid search type' }, status: :unprocessable_entity
       end
