@@ -37,3 +37,11 @@ curl --location 'http://localhost:3000/api/v1/hotels/search?search_type=id&searc
 ## CI/CD
 ![CICD Approach](https://github.com/mcmuralishclint/hotel-merger/blob/master/public/cicd.png)
 
+# How to Setup
+```
+git clone git@github.com:mcmuralishclint/hotel-merger.git
+cd hotel-merger
+docker pull mongo
+docker run -d -p 27017:27017 --name my-mongo mongo
+rails s
+```
