@@ -3,14 +3,18 @@ development:
     default:
       database: procure
       hosts:
-        - localhost:27017
-      username: root
-      password: root
+        - mongo:27017
+
 test:
   clients:
     default:
       database: procure
       hosts:
-        - localhost:27017
-      username: root
-      password: root
+        - mongo:27017
+
+production:
+  clients:
+    default:
+      database: procure
+      hosts:
+        - mongo:27017
