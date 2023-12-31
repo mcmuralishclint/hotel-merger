@@ -21,12 +21,12 @@ curl --location 'http://localhost:3000/api/v1/hotels_ingestion/ingest' \
 
 Query using destination ID
 ```
-curl --location 'http://localhost:3000/api/v1/hotels/search?search_type=destination_id&search_value=5432'
+curl --location 'http://localhost:3000/api/v1/hotels/search?type=destination_id&value=5432'
 ```
 
 Query using hotel_id
 ```
-curl --location 'http://localhost:3000/api/v1/hotels/search?search_type=id&search_value=iJhz'
+curl --location 'http://localhost:3000/api/v1/hotels/search?type=id&value=iJhz'
 ```
 
 * Based on the search_type, the API will dynamically decide how to query the data
@@ -37,11 +37,13 @@ curl --location 'http://localhost:3000/api/v1/hotels/search?search_type=id&searc
 ## CI/CD
 ![CICD Approach](https://github.com/mcmuralishclint/hotel-merger/blob/master/public/cicd.png)
 
+p.s: couldn't complete the elastic beanstalk setup hence pushed the final image to docker
+
 # How to Setup
 ```
-git clone git@github.com:mcmuralishclint/hotel-merger.git
-cd hotel-merger
+docker pull mcmuralishclint/my-rails-app:latest
 docker pull mongo
 docker run -d -p 27017:27017 --name my-mongo mongo
+docker run -p 3000:3000 my-rails-app:latest
 rails s
 ```
