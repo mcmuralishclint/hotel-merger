@@ -34,3 +34,6 @@
 /log
 vendor
 .keep
+/config/credentials/production.key
+
+/config/credentials/development.key

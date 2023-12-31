@@ -250,6 +250,9 @@ GEM
       json
       simplecov
     simplecov_json_formatter (0.1.4)
+    sprockets (4.2.1)
+      concurrent-ruby (~> 1.0)
+      rack (>= 2.2.4, < 4)
     sqlite3 (1.6.9-x64-mingw-ucrt)
     sqlite3 (1.6.9-x86_64-linux)
     sshkit (1.21.7)
@@ -291,6 +294,7 @@ DEPENDENCIES
   rubocop
   simplecov
   simplecov-json
+  sprockets (~> 4.0)
   sqlite3 (~> 1.4)
   tzinfo-data
 
