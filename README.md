@@ -48,7 +48,9 @@ docker run -p 3000:3000 my-rails-app:latest
 rails s
 ```
 
-# Performance Improvements
+# Improvements
+
+## Performance
 - Cache
   - Use caching to speed up the search API
   - Use a cache eviction strategy such that when an ingestion action is performed, the stale data from the cache is evicted and replaced with the updated info
@@ -60,7 +62,7 @@ rails s
 - Rate Limiting
   - Rate limiting can be done on the Search API so we can prevent excessive usage
 
-# Security Improvements
+## Security
 - API Key
   - Use of api key to prevent unauthorized actors from triggering the ingestion API
 - Input Validation
