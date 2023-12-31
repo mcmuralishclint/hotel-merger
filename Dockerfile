@@ -25,4 +25,4 @@ RUN bundle exec rails db:prepare
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["bundle",  "exec", "rails", "server", "-e", "development"]
+CMD ["bundle",  "exec", "rails", "server", "-e", "development", "-b", "0.0.0.0"]
