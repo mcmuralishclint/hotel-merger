@@ -41,10 +41,9 @@ p.s: couldn't complete the elastic beanstalk setup hence pushed the final image 
 
 # How to Setup
 ```
-docker pull mcmuralishclint/my-rails-app:latest
-docker pull mongo
-docker run -d -p 27017:27017 --name my-mongo mongo
-docker run -p 3000:3000 my-rails-app:latest
+git clone git@github.com:mcmuralishclint/hotel-merger.git
+cd hotel-merger
+docker-compose up
 rails s
 ```
 
