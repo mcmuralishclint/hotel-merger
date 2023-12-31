@@ -1,17 +1,14 @@
-version: '3.8'
+version: '3.3'
 
 services:
   my-rails-app:
-    build:
-      context: mcmuralishclint/my-rails-app:latest
-      args:
-        RUBY_VERSION: 3.2.2
     ports:
       - "3000:3000"
     volumes:
       - .:/rails
     depends_on:
       - mongo
+    image: mcmuralishclint/my-rails-app:latest
   mongo:
     image: mongo
     ports:
