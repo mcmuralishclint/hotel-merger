@@ -13,9 +13,7 @@ WORKDIR /rails
 
 # Set production environment
 ENV RAILS_LOG_TO_STDOUT="1" \
-    RAILS_SERVE_STATIC_FILES="true" \
-    RAILS_ENV="development" \
-    BUNDLE_WITHOUT="development"
+    RAILS_SERVE_STATIC_FILES="true"
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
@@ -23,7 +21,8 @@ RUN bundle install
 
 # Copy application code
 COPY . .
+RUN bundle exec rails db:prepare
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["bundle",  "exec", "rails", "server", "-e", "production"]
+CMD ["bundle",  "exec", "rails", "server", "-e", "development"]
