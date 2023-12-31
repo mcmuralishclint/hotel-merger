@@ -47,3 +47,21 @@ docker run -d -p 27017:27017 --name my-mongo mongo
 docker run -p 3000:3000 my-rails-app:latest
 rails s
 ```
+
+# Performance Improvements
+- Cache
+  - Use caching to speed up the search API
+  - Use a cache eviction strategy such that when an ingestion action is performed, the stale data from the cache is evicted and replaced with the updated info
+- Targeted Ingestion
+  - Ingest only the information that's required
+  - We have refined on a supplier level but further improvement can be done where we can ingest based on a hotel_id or destination_id
+- Pagination
+  - As the dataset grows, search performance will detoriate hence paginating the response will be helpful
+- Rate Limiting
+  - Rate limiting can be done on the Search API so we can prevent excessive usage
+
+# Security Improvements
+- API Key
+  - Use of api key to prevent unauthorized actors from triggering the ingestion API
+- Input Validation
+  - Validate input params to prevent any SQL injection
