@@ -50,12 +50,15 @@ cd hotel-merger
 docker-compose up
 ```
 
-Wait until both the images are pulled and until you see a log that says Listening on http://0.0.0.0:3000
+**Note**
+- Wait until both the images are pulled and until you see a log that says Listening on http://0.0.0.0:3000
 Navigate to localhost:3000 on the browser to check if the application has spun up as expected
 
-If there's an update to the application, please pull the latest image `docker pull mcmuralishclint/my-rails-app:latest` before running `docker-compose up`
+- If there's an update to the application, please pull the latest image `docker pull mcmuralishclint/my-rails-app:latest` before running `docker-compose up`
 
-**p.s. Access the application only through http://localhost:3000. DO NOT USE https or 127.0.0.1**
+- Access the application only through http://localhost:3000. DO NOT USE https or 127.0.0.1
+
+- The database starts empty as a default state. Upon initial ingestion, the primary database becomes populated, and subsequent actions will only involve updates. To reattempt ingestion, perform a git stash and rerun the ingestion command.
 
 ## Swagger Documentation
 Access the API documentation and interact with endpoints using Swagger UI:
