@@ -1,11 +1,11 @@
 # Ascenda - Hotel Data Merge
 
-# Solution Design
+## Solution Design
 
-## High Level Design
+### High Level Design
 ![High Level Diagram](https://github.com/mcmuralishclint/hotel-merger/blob/master/public/hld.jpg)
 
-## API
+### API
 1. Provide an ingest API to ingest the information from several sources (Use suppliers: [“*”] to ingest from all the suppliers)
 ```
 curl --location 'http://localhost:3000/api/v1/hotels_ingestion/ingest' \
@@ -31,19 +31,17 @@ curl --location --request GET 'http://localhost:3000/api/v1/hotels/search?type=i
 
 * Based on the search_type, the API will dynamically decide how to query the data
 
-## Database
+### Database
 ![DB Diagram](https://github.com/mcmuralishclint/hotel-merger/blob/master/public/db.png)
 
-## CI/CD
+### CI/CD
 ![CICD Approach](https://github.com/mcmuralishclint/hotel-merger/blob/master/public/cicd.png)
 
 * CI - (Unit test, coverage analysis, lint check) is made available through github actions ✓
 * CD - Use a webhook trigger to sense a git push to deploy through AWS code pipeline to AWS Elastic Beanstalk
 p.s: couldn't complete the elastic beanstalk setup hence pushed the final image to docker
 
-deployed on an AWS EC2 - http://54.197.220.195:3000/api-docs/index.html (hopefully my credits haven't run out when this is being reviewed)
-
-# How to Setup
+## How to Setup
 **Prerequisite:** [Install Docker and Docker Compose](https://docs.docker.com/compose/install/)
 
 ```
@@ -62,13 +60,13 @@ Navigate to localhost:3000 on the browser to check if the application has spun u
 
 - The database starts empty as a default state. Upon initial ingestion, the primary database becomes populated, and subsequent actions will only involve updates. To reattempt ingestion, perform a git stash and rerun the ingestion command.
 
-## Swagger Documentation
+### Swagger Documentation
 Access the API documentation and interact with endpoints using Swagger UI:
 [Swagger URL](http://localhost:3000/api-docs/index.html)
 
-# Improvements
+## Improvements
 
-## Performance
+### Performance
 - Cache
   - Use caching to speed up the search API ✓
   - Use a cache eviction strategy such that when an ingestion action is performed, the stale data from the cache is evicted and replaced with the updated info
@@ -80,14 +78,14 @@ Access the API documentation and interact with endpoints using Swagger UI:
 - Rate Limiting
   - Rate limiting can be done on the Search API so we can prevent excessive usage
 
-## Security
+### Security
 - API Key
   - Use of api key to prevent unauthorized actors from triggering the ingestion API
 - Input Validation
   - Validate input params to prevent any SQL injection
 
-# Developer Guide
-## Containerization
+## Developer Guide
+### Containerization
 The application is packed using docker and pushed to dockerhub. The following commands can be used to build and push to dockerhub once you release a new change.
 
 ```
@@ -97,4 +95,3 @@ docker push mcmuralishclint/my-rails-app
 ```
 
 Disclaimer: Necessary permissions are required to push to the repository in Dockerhub. Please reach out.
-
