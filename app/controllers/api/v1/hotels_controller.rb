@@ -18,6 +18,7 @@ module Api
 
         if serialized_hotels.nil?
           hotels = Hotel.filtered_hotels(search_type, search_value)
+                        .active
                         .paginate(page: page_number, per_page: per_page)
 
           serialized_hotels = ActiveModelSerializers::SerializableResource.new(
