@@ -1,0 +1,151 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/hotels/search":
+    parameters:
+    - name: type
+      in: query
+      required: true
+      description: Type of search (destination_id or id)
+      schema:
+        type: string
+    - name: value
+      in: query
+      required: true
+      description: Value to search for
+      schema:
+        type: string
+    - name: page
+      in: query
+      default: 1
+      description: Page number for pagination
+      schema:
+        type: integer
+    - name: per_page
+      in: query
+      default: 1
+      description: Number of results per page
+      schema:
+        type: integer
+    get:
+      summary: search hotels
+      tags:
+      - Hotels
+      responses:
+        '200':
+          description: Retrieved hotel data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: string
+                    destination_id:
+                      type: integer
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    amenities:
+                      type: object
+                      properties:
+                        General:
+                          type: array
+                          items:
+                            type: string
+                        Room:
+                          type: array
+                          items:
+                            type: string
+                    images:
+                      type: object
+                      properties:
+                        rooms:
+                          type: array
+                          items:
+                            properties:
+                              link:
+                                type: string
+                              description:
+                                type: string
+                        amenities:
+                          type: array
+                          items:
+                            properties:
+                              link:
+                                type: string
+                              description:
+                                type: string
+                        site:
+                          type: array
+                          items:
+                            properties:
+                              link:
+                                type: string
+                              description:
+                                type: string
+                    booking_conditions:
+                      type: array
+                      items:
+                        type: string
+                    location:
+                      type: object
+                      properties:
+                        lat:
+                          type: number
+                          format: float
+                        lng:
+                          type: number
+                          format: float
+                        address:
+                          type: string
+                        city:
+                          type: string
+                        country:
+                          type: string
+                  required:
+                  - id
+                  - destination_id
+                  - name
+                  - description
+                  - amenities
+                  - images
+                  - booking_conditions
+                  - location
+        '422':
+          description: Unprocessable Entity
+  "/api/v1/ingestion/ingest":
+    post:
+      summary: Ingest data from suppliers
+      tags:
+      - Ingestion
+      parameters: []
+      responses:
+        '200':
+          description: Data ingestion started
+        '422':
+          description: Unprocessable Entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                suppliers:
+                  type: array
+                  items:
+                    type: string
+              required:
+              - suppliers
+              description: Use ["*"] to ingest from all the suppliers, ["acme"] from
+                acme only, ["acme","patagonia"] from acme and patagonia only
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000

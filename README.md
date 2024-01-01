@@ -53,6 +53,9 @@ Navigate to localhost:3000 on the browser to check if the application has spun u
 
 If there's an update to the application, please pull the latest image `docker pull mcmuralishclint/my-rails-app:latest` before running `docker-compose up`
 
+## Swagger Documentation
+Access the API documentation and interact with endpoints using Swagger UI:
+[Swagger URL](http://localhost:3000/api-docs/index.html)
 
 # Improvements
 
