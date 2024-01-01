@@ -37,6 +37,8 @@ curl --location --request GET 'http://localhost:3000/api/v1/hotels/search?type=i
 ## CI/CD
 ![CICD Approach](https://github.com/mcmuralishclint/hotel-merger/blob/master/public/cicd.png)
 
+* CI - (Unit test, coverage analysis, lint check) is made available through github actions ✓
+* CD - Use a webhook trigger to sense a git push to deploy through AWS code pipeline to AWS Elastic Beanstalk
 p.s: couldn't complete the elastic beanstalk setup hence pushed the final image to docker
 
 # How to Setup
@@ -49,16 +51,18 @@ docker-compose up
 Wait until both the images are pulled and until you see a log that says Listening on http://0.0.0.0:3000
 Navigate to localhost:3000 on the browser to check if the application has spun up as expected
 
+If there's an update to the application, please pull the latest image `docker pull mcmuralishclint/my-rails-app:latest` before running `docker-compose up`
+
 
 # Improvements
 
 ## Performance
 - Cache
-  - Use caching to speed up the search API
+  - Use caching to speed up the search API ✓
   - Use a cache eviction strategy such that when an ingestion action is performed, the stale data from the cache is evicted and replaced with the updated info
 - Targeted Ingestion
-  - Ingest only the information that's required
-  - We have refined on a supplier level but further improvement can be done where we can ingest based on a hotel_id or destination_id
+  - Ingest by all suppliers and ingestion by an individual supplier are available ✓
+  - Ingest only the information that's required i.e We have refined on a supplier level but further improvement can be done where we can ingest based on a hotel_id or destination_id
 - Pagination
   - As the dataset grows, search performance will detoriate hence paginating the response will be helpful
 - Rate Limiting
