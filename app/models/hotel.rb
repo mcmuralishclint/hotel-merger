@@ -11,4 +11,8 @@ class Hotel < ApplicationRecord
   def self.filtered_hotels(search_type, search_value)
     where(search_type => search_value)
   end
+
+  def self.active
+    where(deleted_at: nil)
+  end
 end
