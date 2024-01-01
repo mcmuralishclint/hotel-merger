@@ -14,6 +14,7 @@ module Merge
       merged_info = []
       hotel_ids.each do |hotel_id|
         hotels = RawData.where(hotel_id:)
+        #TODO:HandleDeletions: Filer by deleted_at: nil
         merged_params = {}
         merged_params[:id] = hotel_id
         merged_params[:destination_id] = merge_destination_ids(hotels.pluck(:destination_id))

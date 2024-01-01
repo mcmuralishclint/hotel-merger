@@ -4,6 +4,7 @@ module Persist
   class RawDataPersistentService < BaseService
     def validate_and_save
       validated_params = validate_params.with_indifferent_access
+      #TODO:HandleDeletions: Mark all hotels' deleted_at key to current date/time base on the source
       RawData.upsert_from_params(validated_params)
     end
 
@@ -21,6 +22,7 @@ module Persist
       validated_params['images_attributes'] = validate_images_attributes(@params['images_attributes'])
       validated_params['booking_conditions_attributes'] =
         validate_booking_conditions_attributes(@params['booking_conditions_attributes'])
+      #TODO:HandleDeletions: Mark deleted_at as nil
       validated_params.reject! { |_k, v| v.nil? }
       validated_params
     end
