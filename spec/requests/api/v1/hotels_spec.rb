@@ -7,11 +7,17 @@ RSpec.describe 'api/v1/hotels', type: :request do
     parameter name: :page, in: :query, type: :integer, default: 1, description: 'Page number for pagination'
     parameter name: :per_page, in: :query, type: :integer, default: 1, description: 'Number of results per page'
 
+
+
     get('search hotels') do
       tags 'Hotels'
       produces 'application/json'
 
       response '200', 'Retrieved hotel data' do
+        let(:type) {"destination_id"}
+        let(:value) {"5432"}
+        let(:page) {1}
+        let(:per_page) {1}
         schema type: :array,
                items: {
                  properties: {
@@ -76,6 +82,10 @@ RSpec.describe 'api/v1/hotels', type: :request do
       end
 
       response '422', 'Unprocessable Entity' do
+        let(:type) {""}
+        let(:value) {""}
+        let(:page) {1}
+        let(:per_page) {1}
         run_test!
       end
     end

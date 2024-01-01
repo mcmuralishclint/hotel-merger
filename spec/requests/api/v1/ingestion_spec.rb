@@ -19,8 +19,7 @@ RSpec.describe 'api/v1/ingestion', type: :request do
         description: 'Use ["*"] to ingest from all the suppliers, ["acme"] from acme only, ["acme","patagonia"] from acme and patagonia only'
       }
 
-      let(:all_suppliers) { { suppliers: ["*"] } }
-      let(:specific_suppliers) { { suppliers: ["acme", "patagonia", "paperflies"] } }
+      let(:suppliers) { { suppliers: ["*"] } }
 
       response '200', 'Data ingestion started' do
         schema type: :object,
