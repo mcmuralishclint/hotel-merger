@@ -41,6 +41,8 @@ curl --location --request GET 'http://localhost:3000/api/v1/hotels/search?type=i
 * CD - Use a webhook trigger to sense a git push to deploy through AWS code pipeline to AWS Elastic Beanstalk
 p.s: couldn't complete the elastic beanstalk setup hence pushed the final image to docker
 
+deployed on an AWS EC2 - http://54.197.220.195:3000/api-docs/index.html (hopefully my credits haven't run out when this is being reviews)
+
 ## How to Setup
 **Prerequisite:** [Install Docker and Docker Compose](https://docs.docker.com/compose/install/)
 
