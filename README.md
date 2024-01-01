@@ -78,3 +78,15 @@ Access the API documentation and interact with endpoints using Swagger UI:
   - Use of api key to prevent unauthorized actors from triggering the ingestion API
 - Input Validation
   - Validate input params to prevent any SQL injection
+
+# Developer Guide
+## Containerization
+The application is packed using docker and pushed to dockerhub. The following commands can be used to build and push to dockerhub once you release a new change.
+
+```
+docker build --no-cache -t my-rails-app:latest .
+docker tag my-rails-app:latest mcmuralishclint/my-rails-app
+docker push mcmuralishclint/my-rails-app
+```
+
+Disclaimer: Necessary permissions are required to push to the repository in Dockerhub. Please reach out.
