@@ -98,4 +98,3 @@ docker push mcmuralishclint/my-rails-app
 
 Disclaimer: Necessary permissions are required to push to the repository in Dockerhub. Please reach out.
 
-## Patterns
