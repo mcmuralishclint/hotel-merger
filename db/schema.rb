@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_075052) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["hotel_id", "amenity_type", "name"], name: "index_amenities_on_hotel_id_and_amenity_type_and_name", unique: true
     t.index ["hotel_id"], name: "index_amenities_on_hotel_id"
   end
 
@@ -25,6 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_075052) do
     t.text "condition"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["hotel_id", "condition"], name: "index_booking_conditions_on_hotel_id_and_condition", unique: true
     t.index ["hotel_id"], name: "index_booking_conditions_on_hotel_id"
   end
 
@@ -34,6 +36,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_075052) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_hotels_on_deleted_at"
+    t.index ["destination_id"], name: "index_hotels_on_destination_id"
   end
 
   create_table "images", force: :cascade do |t|
@@ -43,6 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_28_075052) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["hotel_id", "image_type", "link"], name: "index_images_on_hotel_id_and_image_type_and_link", unique: true
     t.index ["hotel_id"], name: "index_images_on_hotel_id"
   end
 
