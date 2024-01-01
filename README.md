@@ -21,12 +21,12 @@ curl --location 'http://localhost:3000/api/v1/hotels_ingestion/ingest' \
 
 Query using destination ID
 ```
-curl --location 'http://localhost:3000/api/v1/hotels/search?type=destination_id&value=5432'
+curl --location --request GET 'http://localhost:3000/api/v1/hotels/search?type=destination_id&value=5432&page=1&per_page=2'
 ```
 
 Query using hotel_id
 ```
-curl --location 'http://localhost:3000/api/v1/hotels/search?type=id&value=iJhz'
+curl --location --request GET 'http://localhost:3000/api/v1/hotels/search?type=id&value=iJhz&page=1&per_page=2'
 ```
 
 * Based on the search_type, the API will dynamically decide how to query the data
@@ -44,8 +44,11 @@ p.s: couldn't complete the elastic beanstalk setup hence pushed the final image 
 git clone git@github.com:mcmuralishclint/hotel-merger.git
 cd hotel-merger
 docker-compose up
-rails s
 ```
+
+Wait until both the images are pulled and until you see a log that says Listening on http://0.0.0.0:3000
+Navigate to localhost:3000 on the browser to check if the application has spun up as expected
+
 
 # Improvements
 
