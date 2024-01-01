@@ -7,4 +7,8 @@ class Hotel < ApplicationRecord
   has_many :booking_conditions, dependent: :destroy
 
   accepts_nested_attributes_for :location, :amenities, :images, :booking_conditions
+
+  def self.filtered_hotels(search_type, search_value)
+    where(search_type => search_value)
+  end
 end

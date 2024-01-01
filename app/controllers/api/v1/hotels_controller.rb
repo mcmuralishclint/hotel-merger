@@ -10,13 +10,21 @@ module Api
       def search
         search_type = params[:type]
         search_value = params[:value]
+        page_number = (params[:page].presence || 1).to_i
+        per_page = (params[:per_page].presence || 1).to_i
 
-        cache_key = "#{search_type}:#{search_value}"
+        cache_key = "#{search_type}:#{search_value}:page#{page_number}:per_page#{per_page}"
         serialized_hotels = Rails.cache.fetch(cache_key)
 
         if serialized_hotels.nil?
-          hotels = Hotel.where(search_type => search_value).to_a
-          serialized_hotels = ActiveModelSerializers::SerializableResource.new(hotels, each_serializer: HotelSerializer).as_json
+          hotels = Hotel.filtered_hotels(search_type, search_value)
+                        .paginate(page: page_number, per_page: per_page)
+
+          serialized_hotels = ActiveModelSerializers::SerializableResource.new(
+            hotels,
+            each_serializer: HotelSerializer
+          ).as_json
+
           Rails.cache.write(cache_key, serialized_hotels) unless serialized_hotels.empty?
         end
 
