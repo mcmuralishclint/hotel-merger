@@ -42,6 +42,8 @@ curl --location --request GET 'http://localhost:3000/api/v1/hotels/search?type=i
 p.s: couldn't complete the elastic beanstalk setup hence pushed the final image to docker
 
 # How to Setup
+**Prerequisite:** [Install Docker and Docker Compose](https://docs.docker.com/compose/install/)
+
 ```
 git clone git@github.com:mcmuralishclint/hotel-merger.git
 cd hotel-merger
@@ -90,3 +92,5 @@ docker push mcmuralishclint/my-rails-app
 ```
 
 Disclaimer: Necessary permissions are required to push to the repository in Dockerhub. Please reach out.
+
+## Patterns
